@@ -1,3 +1,8 @@
+/* 슬릭슬라이드 깜박임 해결 : 브라우즈 업그레이드와 관련있는 이슈였음... reset으로 옮길 예정 */
+.slick-slide {
+    transform: translate3d(0, 0, 0);
+}
+
 .inner {
     width: 1200px;
     margin: 0 auto;
@@ -27,14 +32,15 @@
     margin: 0 0 10px 0;
 }
 
-.TopBanner p {
-    font-size: 15px;
-}
 
 .TopBanner h2 span {
     font-weight: 400;
     color: #00e085;
     margin: 0 0 0 10px;
+}
+
+.TopBanner p {
+    font-size: 15px;
 }
 
 .TopBanner .top_close_btn {
@@ -45,7 +51,7 @@
 }
 
 .Header {
-    position: sticky;
+    position: fixed;
     top: 0;
     left: 0;
     right: 0;
@@ -119,7 +125,7 @@
     position: absolute;
     left: 35px;
     right: 100%;
-    bottom: 0;
+    bottom: -1px;
     height: 2px;
     background: #008850;
     transition: 0.3s;
@@ -157,8 +163,12 @@
 }
 
 .Section01 {
-    transform: translateY(-155px);
-    height: 745px;
+    padding: 155px 0 0 0;
+    transition: 0.5s;
+}
+
+.Section01.on {
+    padding: 0 0 0 0;
 }
 
 .Section02 {
@@ -206,8 +216,8 @@
 .Section02 .inner .des::before {
     content: "";
     position: absolute;
-    top: -60px;
     left: 50%;
+    top: -60px;
     transform: translateX(-50%);
     width: 2px;
     height: 40px;
