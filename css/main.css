@@ -1,11 +1,29 @@
-/* 슬릭슬라이드 깜박임 해결 : 브라우즈 업그레이드와 관련있는 이슈였음... reset으로 옮길 예정 */
-.slick-slide {
-    transform: translate3d(0, 0, 0);
+/* 슬릭슬라이드 깜박임 해결 : 브라우즈 업그레이드와 관련있는 이슈였음
+... reset으로 옮길 예정 
+cloned 가 생성 되는 시간보다 변하는 시간이 길어서 ... 가 원인...
+*/
+
+.slick-track,
+.slick-list {
+    transition-delay: 30ms;
+}
+
+body {
+    overflow-x: hidden;
+}
+
+.Wrap {
+    width: 100%;
+    min-width: 1900px;
 }
 
 .inner {
     width: 1200px;
     margin: 0 auto;
+}
+
+.mainColor {
+    color: #008850;
 }
 
 .TopBanner {
@@ -32,7 +50,6 @@
     margin: 0 0 10px 0;
 }
 
-
 .TopBanner h2 span {
     font-weight: 400;
     color: #00e085;
@@ -55,6 +72,7 @@
     top: 0;
     left: 0;
     right: 0;
+    min-width: 1900px;
     /* padding: 0 75px; */
     background: rgba(0, 0, 0, 0.3);
     color: #f9f9f9;
@@ -107,6 +125,116 @@
 .Header .top_service {
     float: right;
     margin: 0 70px 0 0;
+}
+
+.Header .top_service .project {
+    float: left;
+    margin: 0 20px 0 0;
+}
+
+.Header .top_service .project li {
+    display: inline-block;
+    font-weight: 300;
+    font-size: 15px;
+}
+
+.Header .top_service .project li~li::before {
+    content: "";
+    display: inline-block;
+    width: 1px;
+    height: 10px;
+    background: #ddd;
+    margin: 0 10px;
+}
+
+.Header .top_service strong:hover {
+    color: #008850;
+}
+
+.Header .top_service strong.on {
+    color: #008850;
+}
+
+.Header .top_service .lang {
+    position: relative;
+    float: left;
+    margin: 0 20px 0 0;
+}
+
+.Header .top_service .lang .arrow {
+    font-size: 7px;
+    vertical-align: 0.3em;
+}
+
+.Header .top_service .lang.on .arrow {
+    transform: rotate(180deg);
+}
+
+.Header .top_service .lang .lang_box {
+    display: none;
+    position: absolute;
+    top: 70px;
+    left: 50%;
+    transform: translateX(-50%);
+    line-height: 1.45;
+    border: 2px solid #008850;
+    background: #fff;
+    color: #444444;
+    padding: 20px 35px;
+}
+
+.Header .top_service .lang.on .lang_box {
+    display: block;
+}
+
+.Header .top_service .top_search {
+    position: relative;
+    float: left;
+}
+
+.Header .top_search .search_box {
+    display: none;
+    position: absolute;
+    top: 80px;
+    right: -65px;
+    line-height: 1;
+    border: 1px solid #ddd;
+    background: #fff;
+    padding: 30px 50px;
+    width: 600px;
+    text-align: center;
+}
+
+.Header .top_search.on .search_box {
+    display: block;
+}
+
+.Header .top_search .search_box input[type="text"] {
+    font-size: 20px;
+    width: 400px;
+    border: none;
+    outline: none;
+    border-bottom: 2px solid #444;
+}
+
+.Header .top_search .search_box button {
+    background: transparent;
+    border: none;
+    outline: none;
+    font-size: 30px;
+}
+
+.Header .top_search .search_box::before {
+    content: "";
+    position: absolute;
+    top: -10px;
+    right: 60px;
+    width: 20px;
+    height: 20px;
+    border-left: 1px solid #ddd;
+    border-top: 1px solid #ddd;
+    background: #fff;
+    transform: rotate(45deg);
 }
 
 .Header .Gnb>ul>li {
@@ -168,6 +296,19 @@
     font-size: 50px;
     font-weight: 900;
     margin: 0 0 20px 0;
+    transform: translateY(100px);
+    opacity: 0;
+}
+
+.main_slider figure.on h2 {
+    transform: translateY(0);
+    opacity: 1;
+    transition: 0.5s;
+}
+
+.main_slider figure span {
+    display: block;
+    margin: 10px 0;
 }
 
 .main_slider figure p {
@@ -175,6 +316,14 @@
     font-weight: 300;
     line-height: 1.45;
     margin: 0 0 50px 0;
+    transform: translateY(100px);
+    opacity: 0;
+}
+
+.main_slider figure.on p {
+    transform: translateY(0);
+    opacity: 1;
+    transition: 0.5s 0.5s;
 }
 
 .main_slider figure a {
@@ -183,6 +332,14 @@
     border: 1px solid #f9f9f9;
     color: #f9f9f9;
     font-size: 13px;
+    transform: translateY(100px);
+    opacity: 0;
+}
+
+.main_slider figure.on a {
+    transform: translateY(0);
+    opacity: 1;
+    transition: 0.5s 1s;
 }
 
 .Section01 {
@@ -199,14 +356,17 @@
     position: absolute;
     top: 50%;
     left: 50%;
-    /* transform: translate(-50%, -50%); */
+    transform: translate(-50%, -50%);
+    width: 60px;
+    height: 60px;
     color: #fff;
-    font-size: 0;
+    font-size: 14px;
     font-weight: 300;
     cursor: pointer;
     background: transparent;
     border: none;
     outline: none;
+    font-size: 0;
 }
 
 .Section01 .slide_handler button::after {
@@ -230,12 +390,14 @@
 
 .Section01 .slide_handler button:first-child::after {
     left: 0;
-    transform: translate(3px, -10px) rotate(-45deg);
+    transform: rotate(-45deg);
+    transform-origin: left top;
 }
 
 .Section01 .slide_handler button:last-child::after {
     right: 0;
-    transform: translate(17px, -10px) rotate(45deg);
+    transform: rotate(45deg);
+    transform-origin: right top;
 }
 
 .Section01 .slide_handler button:first-child {
@@ -255,6 +417,11 @@
     font-size: 35px;
 }
 
+.Section01 .num span {
+    font-size: 20px;
+    color: #ddd;
+}
+
 .Section01 .slide_dots {
     position: absolute;
     top: 50%;
@@ -269,6 +436,7 @@
 
 .Section01 .slide_dots li {
     margin: 0 0 10px 0;
+    cursor: pointer;
 }
 
 .Section01 .slide_dots li span {
@@ -500,6 +668,16 @@
     box-shadow: 20px 20px 30px rgba(0, 0, 0, 0.1);
 }
 
+.Section04 .case::after {
+    content: "";
+    position: absolute;
+    top: 60px;
+    left: -20px;
+    width: 40px;
+    height: 2px;
+    background: #008850;
+}
+
 .Section04 .inner a {
     display: inline-block;
     padding: 10px 25px;
@@ -571,6 +749,7 @@
     height: 20px;
     background: #ddd;
     margin: 0 10px;
+    cursor: pointer;
 }
 
 .Section04 .slick-dots li.slick-active {
@@ -579,4 +758,325 @@
 
 .Section04 .slick-dots li button {
     display: none;
+}
+
+.Section05 {
+    padding: 100px 0 160px 0;
+    background: url(../assets/section4_bg.jpg) no-repeat left bottom;
+    text-align: center;
+}
+
+.Section05 h2 {
+    font-size: 30px;
+    font-weight: 700;
+    margin: 0 0 15px 0;
+}
+
+.Section05>p {
+    font-size: 15px;
+    font-weight: 300;
+    margin: 0 0 40px 0;
+}
+
+.Section05 .inner {
+    position: relative;
+    width: 800px;
+}
+
+.Section05 .movie_case {
+    width: 800px;
+    height: 450px;
+    margin: 0 auto 80px auto;
+}
+
+.Section05 .txt {
+    width: 800px;
+    margin: 0 auto;
+}
+
+.Section05 .txt li {
+    float: left;
+    width: 50%;
+}
+
+.Section05 .txt strong {
+    display: block;
+    font-size: 22px;
+    color: #00e085;
+    margin: 0 0 15px 0;
+}
+
+.Section05 .txt span {
+    display: block;
+    font-size: 15px;
+    font-weight: 300;
+    color: #f9f9f9;
+}
+
+.Section05 .movie_handler {
+    position: absolute;
+    top: 225px;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.Section05 .movie_handler button {
+    border: none;
+    outline: none;
+    background: transparent;
+    font-size: 0;
+}
+
+.Section05 .movie_handler button::after {
+    content: "\ea3b";
+    font-size: 50px;
+    font-family: xeicon;
+    color: #fff;
+    background: #008850;
+    padding: 20px;
+    border-radius: 50%;
+}
+
+.Section05 .movie_handler button.on::after {
+    content: "\ea3e";
+}
+
+.Section06 {
+    padding: 100px 0;
+    text-align: center;
+}
+
+.Section06 .inner {
+    width: 1230px;
+}
+
+.Section06 h2 {
+    font-size: 30px;
+    font-weight: 700;
+    margin: 0 0 15px 0;
+}
+
+.Section06>p {
+    font-size: 15px;
+    font-weight: 300;
+    margin: 0 0 40px 0;
+}
+
+.Section06 .inner figure {
+    float: left;
+    width: 33.333333%;
+    padding: 0 15px;
+    text-align: left;
+}
+
+.Section06 .inner figure img {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    margin: 0 0 20px 0;
+}
+
+.Section06 .inner figure .sort {
+    display: block;
+    margin: 0 0 15px 0;
+    font-size: 14px;
+    font-weight: 500;
+    color: #008850;
+}
+
+.Section06 .inner figure .title {
+    margin: 0 0 20px 0;
+    font-size: 19px;
+    font-weight: 500;
+    line-height: 1.45;
+}
+
+.Section06 .inner figure:hover .title {
+    text-decoration: underline 2px;
+}
+
+.Section06 .inner figure .date {
+    font-size: 13px;
+    font-weight: 300;
+}
+
+.Footer {
+    position: relative;
+    border-top: 1px solid #ddd;
+    line-height: 80px;
+}
+
+.Footer .ft_top {
+    border-bottom: 1px solid #ddd;
+}
+
+.Footer ul>li {
+    float: left;
+}
+
+.Footer .ft_top .left {
+    float: left;
+}
+
+.Footer .ft_top .left li~li::before {
+    content: "";
+    display: inline-block;
+    width: 3px;
+    height: 3px;
+    background: #008850;
+    margin: 0 15px;
+    vertical-align: middle;
+}
+
+.Footer .ft_top .left span {
+    font-size: 20px;
+}
+
+.Footer .ft_top .right {
+    float: right;
+}
+
+.Footer .ft_top .right li a {
+    position: relative;
+    display: block;
+    padding: 0 30px 0 20px;
+}
+
+.Footer .ft_top .right li a::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    right: 0px;
+    width: 10px;
+    height: 2px;
+    background: #008850;
+}
+
+.Footer .ft_top .right li a::after {
+    content: "";
+    position: absolute;
+    top: calc(50% - 4px);
+    right: 4px;
+    width: 2px;
+    height: 10px;
+    background: #008850;
+}
+
+.Footer .ft_top .right li.on a::after {
+    display: none;
+}
+
+.Footer .ft_top .content {
+    position: absolute;
+    top: -80px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.Footer .ft_top .content>ul {
+    display: none;
+    width: 1200px;
+    height: 80px;
+    background: #f9f9f9;
+    border: 1px solid #ddd;
+    padding: 0 0 0 50px;
+}
+
+.Footer .ft_top .content>ul>li {
+    margin: 0 30px 0 0;
+}
+
+.Footer .ft_top .content>ul.on {
+    display: block;
+}
+
+.Footer .ft_bottom {
+    line-height: 1;
+    padding: 30px 0;
+}
+
+.Footer .ft_bottom .family_link {
+    float: right;
+    padding: 8px 0 0 0;
+    margin: 0 10px 0 0;
+}
+
+.Footer .ft_bottom .family_link select {
+    background: #444;
+    color: #f9f9f9;
+    font-size: 14px;
+    text-transform: uppercase;
+    padding: 0 15px;
+}
+
+.Footer .ft_bottom .left {
+    float: left;
+    font-size: 15px;
+}
+
+.Footer .ft_bottom .left address {
+    margin: 0 0 5px 0;
+}
+
+.Footer .ft_bottom .right {
+    float: right;
+}
+
+.Footer .ft_bottom .right i {
+    font-size: 20px;
+    color: #fff;
+    background: #444;
+    padding: 10px;
+    border-radius: 50%;
+    margin: 0 0 0 10px;
+}
+
+.to_top {
+    display: none;
+    position: fixed;
+    bottom: 100px;
+    right: 100px;
+    cursor: pointer;
+}
+
+.to_top i {
+    font-size: 30px;
+    padding: 15px;
+    color: #fff;
+    background: #008850;
+    border-radius: 50%;
+}
+
+.popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.3);
+    z-index: 9999;
+}
+
+.popup .pop_case {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.popup .pop_close {
+    background: #fff;
+    padding: 5px 10px;
+}
+
+.popup .pop_close span {
+    vertical-align: middle;
+    margin: 0 0 0 5px;
+}
+
+.popup .pop_close button {
+    float: right;
+    border: none;
+    background: #008850;
+    color: #fff;
 }
