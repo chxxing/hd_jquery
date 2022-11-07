@@ -142,7 +142,6 @@ $(function () {
     });
 
     var getCookie = $.cookie('popup');
-
     if (!getCookie) {
         $('.popup').show();
     }
